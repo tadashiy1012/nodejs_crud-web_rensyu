@@ -8,18 +8,17 @@ const conn = mysql.createConnection({
   port: 3306,
   database: 'mydb'
 });
+conn.connect();
 
 router.get('/', function(req, res) {
   res.render('dbindex', {});
 });
 
 router.get('/list', function(req, res) {
-  conn.connect();
   conn.query('select * from member limit 100;', (err, rows) => {
     if (err) throw err;
     res.render('dblist', {items: rows});
   });
-  conn.end();
 });
 
 router.get('/create', function(req, res) {
@@ -27,7 +26,6 @@ router.get('/create', function(req, res) {
 });
 
 router.post('/create', function(req, res) {
-  conn.connect();
   const name = req.body.name;
   const q = 'insert into member (id, name) values (null, "' + name + '");';
   conn.query(q, (err, results) => {
@@ -35,7 +33,6 @@ router.post('/create', function(req, res) {
     console.log(results.insertId);
     res.redirect('./db/list');
   });
-  conn.end();
 });
 
 module.exports = router;
