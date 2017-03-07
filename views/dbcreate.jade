@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 dbcreate
+  form(method='POST' action='./db/create')
+    input(type='text' name='name')
+    br
+    input(type='submit' value='submit')

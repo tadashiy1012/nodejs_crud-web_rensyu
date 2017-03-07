@@ -22,4 +22,20 @@ router.get('/list', function(req, res) {
   conn.end();
 });
 
+router.get('/create', function(req, res) {
+  res.render('dbcreate', {});
+});
+
+router.post('/create', function(req, res) {
+  conn.connect();
+  const name = req.body.name;
+  const q = 'insert into member (id, name) values (null, ' + name + ');';
+  conn.query(q, (err, results) => {
+    if (err) throw err;
+    console.log(results.insertId);
+    res.redirect('./db/list');
+  });
+  conn.end();
+});
+
 module.exports = router;
