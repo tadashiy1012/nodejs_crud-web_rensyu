@@ -50,11 +50,11 @@ function execQuery(query) {
 
 router.post('/delete', (req, res) => {
   const id = req.body.name;
-  const q = 'select * from member where id = "' + id + '";';
-  const q2 = 'delete from member where id = "' + id + '";';
+  const q = 'select * from member where id = ' + id + ';';
+  const q2 = 'delete from member where id = ' + id + ';';
   execQuery(q).then((result) => {
     console.log(result);
-    redirect('./list');
+    res.redirect('./list');
   }, (err) => {
     console.error(err);
     throw err;
