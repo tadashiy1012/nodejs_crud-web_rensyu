@@ -2,4 +2,9 @@ extends layout
 
 block content
   h1 dblist
-  code= items
+  ul
+    each item in items
+      li
+        span item.id
+        span :
+        span item.name
