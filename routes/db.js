@@ -11,18 +11,18 @@ const conn = mysql.createConnection({
 conn.connect();
 
 router.get('/', function(req, res) {
-  res.render('dbindex', {});
+  res.render('dbindex', {title: 'dbindex'});
 });
 
 router.get('/list', function(req, res) {
   conn.query('select * from member limit 100;', (err, rows) => {
     if (err) throw err;
-    res.render('dblist', {items: rows});
+    res.render('dblist', {title: 'dblist', items: rows});
   });
 });
 
 router.get('/create', function(req, res) {
-  res.render('dbcreate', {});
+  res.render('dbcreate', {title: 'dbcreate'});
 });
 
 router.post('/create', function(req, res) {
@@ -32,6 +32,32 @@ router.post('/create', function(req, res) {
     if (err) throw err;
     console.log(results.insertId);
     res.redirect('./list');
+  });
+});
+
+router.get('/delete', (req, res) => {
+  res.render('dbdelete', {title: 'dbdelete'});
+});
+
+function execQuery(query) {
+  return new Promise((resolve, reject) => {
+    conn.query(q, (err, result) => {
+      if (err) { reject(err); }
+      else { resolve(result); }
+    });
+  });
+}
+
+router.post('/delete', (req, res) => {
+  const id = req.body.name;
+  const q = 'select * from member where id = "' + id + '";';
+  const q2 = 'delete from member where id = "' + id + '";';
+  execQuery(q).then((result) => {
+    console.log(result);
+    redirect('./list');
+  }, (err) => {
+    console.error(err);
+    throw err;
   });
 });
 
