@@ -49,7 +49,7 @@ function execQuery(query) {
 }
 
 router.post('/delete', (req, res) => {
-  const id = req.body.name;
+  const id = req.body.id;
   const q = 'select * from member where id = ' + id + ';';
   const q2 = 'delete from member where id = ' + id + ';';
   execQuery(q).then((result) => {
