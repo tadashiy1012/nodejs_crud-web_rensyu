@@ -31,7 +31,7 @@ router.post('/create', function(req, res) {
   conn.query(q, (err, results) => {
     if (err) throw err;
     console.log(results.insertId);
-    res.redirect('./db/list');
+    res.redirect('./list');
   });
 });
 
