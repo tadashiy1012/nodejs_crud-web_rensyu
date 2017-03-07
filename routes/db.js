@@ -41,7 +41,7 @@ router.get('/delete', (req, res) => {
 
 function execQuery(query) {
   return new Promise((resolve, reject) => {
-    conn.query(q, (err, result) => {
+    conn.query(query, (err, result) => {
       if (err) { reject(err); }
       else { resolve(result); }
     });
