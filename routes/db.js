@@ -87,4 +87,18 @@ router.get('/update', (req, res) => {
   });
 });
 
+router.post('/update', (req, res) => {
+  const id = req.body.id;
+  const name = req.body.name;
+  console.log(id, name);
+  const q = 'update member set name = "' + name + '" where id = ' + id + ';';
+  execQuery(q).then((result) => {
+    console.log(result);
+    res.redirect('./list');
+  }, (err) => {
+    console.error(err);
+    throw err;
+  });
+});
+
 module.exports = router;
