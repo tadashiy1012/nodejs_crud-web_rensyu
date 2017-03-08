@@ -8,3 +8,5 @@ block content
         span= item.id
         span :
         span= item.name
+        span |
+        span: a(href='./update?id=#{item.id}') [del]
