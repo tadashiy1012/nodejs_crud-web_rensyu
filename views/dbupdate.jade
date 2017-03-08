@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 dbupdate
+  form(method='POST' action='./update')
+    input(type='hidden' name='id' value=tgt.id)
+    input(type='text' name='name' value=tgt.name)
+    br
+    input(type='submit' value='submit')

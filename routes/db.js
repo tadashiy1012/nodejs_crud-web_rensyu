@@ -74,7 +74,17 @@ router.post('/delete', (req, res) => {
 router.get('/update', (req, res) => {
   const id = req.query.id;
   console.log(id);
-  res.redirect('./');
+  const q = 'select * from member where id = ' + id + ';';
+  execQuery(q).then((result) => {
+    if (result.length === 0) {
+      res.redirect('./list');
+    } else {
+      res.render('dbupdate', {title: 'dbupdate', tgt: result[0]});
+    }
+  }, (err) => {
+    console.error(err);
+    throw err;
+  });
 });
 
 module.exports = router;
