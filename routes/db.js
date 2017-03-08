@@ -71,4 +71,10 @@ router.post('/delete', (req, res) => {
   });
 });
 
+router.get('/update', (req, res) => {
+  const id = req.query.id;
+  console.log(id);
+  res.redirect('./');
+});
+
 module.exports = router;
