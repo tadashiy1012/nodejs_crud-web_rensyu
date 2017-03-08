@@ -54,6 +54,16 @@ router.post('/delete', (req, res) => {
   const q2 = 'delete from member where id = ' + id + ';';
   execQuery(q).then((result) => {
     console.log(result);
+    if (result.length === 0) {
+      res.redirect('./list');
+    } else {
+      return execQuery(q2);
+    }
+  }, (err) => {
+    console.error(err);
+    throw err;
+  }).then((result) => {
+    console.log(result);
     res.redirect('./list');
   }, (err) => {
     console.error(err);
